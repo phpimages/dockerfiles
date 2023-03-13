@@ -41,6 +41,5 @@ jobs:
                         VERSION=${{ matrix.version }}
                         BUILD_DATE=${{ steps.date.outputs.date }}
                     target: ${{ matrix.stage }}
-                    tags: ${{ matrix.version }}
-                    labels: ${{ env.REGISTRY }}/phpimages/${{ matrix.stage }}
+                    tags: ${{ env.REGISTRY }}/phpimages/${{ matrix.stage }}:${{ matrix.version }}
                     push: true
