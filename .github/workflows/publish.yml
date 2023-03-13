@@ -11,8 +11,9 @@ jobs:
     build-and-push-image:
         strategy:
             matrix:
-                version: [ 7.4, 8.1, 8.2 ]
+                version: [ 7.4, 8.0, 8.1, 8.2 ]
                 stage: [ 'php-cli-xdebug' ]
+                os: [ 'alpine', 'bullseye' ]
         runs-on: ubuntu-latest
         permissions:
             contents: read
@@ -40,6 +41,7 @@ jobs:
                     build-args: |
                         VERSION=${{ matrix.version }}
                         BUILD_DATE=${{ steps.date.outputs.date }}
+                        OS=${{ matrix.os }}
                     target: ${{ matrix.stage }}
-                    tags: ${{ env.REGISTRY }}/phpimages/${{ matrix.stage }}:${{ matrix.version }}
+                    tags: ${{ env.REGISTRY }}/phpimages/${{ matrix.stage }}:${{ matrix.version }}-${{ matrix.os }}
                     push: true

@@ -1,7 +1,12 @@
 ARG VERSION
 ARG BUILD_DATE
+ARG OS
 
-FROM php:$VERSION-cli-alpine as php-cli-xdebug
+FROM php:$VERSION-cli-alpine as php-cli-xdebug-alpine
+
+FROM php:$VERSION-cli-bullseye as php-cli-xdebug-bullseye
+
+FROM php-cli-xdebug-$OS as php-cli-xdebug
 
 LABEL org.opencontainers.image.created=$BUILD_DATE
 LABEL org.opencontainers.image.source="https://github.com/phpimages/dockerfile"
