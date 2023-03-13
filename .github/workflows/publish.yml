@@ -12,7 +12,7 @@ jobs:
         strategy:
             matrix:
                 version: [ '7.4', '8.0', '8.1', '8.2' ]
-                stage: [ 'php-cli-xdebug' ]
+                stage: [ 'php-cli-xdebug', 'php-cli-allinclusive' ]
                 os: [ 'alpine', 'bullseye' ]
         runs-on: ubuntu-latest
         permissions:
