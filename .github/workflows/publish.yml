@@ -1,46 +1,46 @@
 name: Create and publish a Docker image
 
 on:
-  push:
-    branches: ['main']
+    push:
+        branches: [ 'main' ]
 
 env:
-  REGISTRY: ghcr.io
+    REGISTRY: ghcr.io
 
 jobs:
-  build-and-push-image:
-    strategy:
-      matrix:
-        version: [7.4, 8.1, 8.2]
-        stage: ['php-cli-xdebug']
-    runs-on: ubuntu-latest
-    permissions:
-      contents: read
-      packages: write
+    build-and-push-image:
+        strategy:
+            matrix:
+                version: [ 7.4, 8.1, 8.2 ]
+                stage: [ 'php-cli-xdebug' ]
+        runs-on: ubuntu-latest
+        permissions:
+            contents: read
+            packages: write
 
-    steps:
-      - name: Checkout repository
-        uses: actions/checkout@v3
+        steps:
+            -   name: Checkout repository
+                uses: actions/checkout@v3
 
-      - name: Log in to the Container registry
-        uses: docker/login-action@f054a8b539a109f9f41c372932f1ae047eff08c9
-        with:
-          registry: ${{ env.REGISTRY }}
-          username: ${{ github.actor }}
-          password: ${{ secrets.GITHUB_TOKEN }}
+            -   name: Log in to the Container registry
+                uses: docker/login-action@f054a8b539a109f9f41c372932f1ae047eff08c9
+                with:
+                    registry: ${{ env.REGISTRY }}
+                    username: ${{ github.actor }}
+                    password: ${{ secrets.GITHUB_TOKEN }}
 
-      - name: Get current build date
-        id: date
-        run: echo "::set-output name=date::$(date -u +'%Y-%m-%dT%H:%M:%SZ')"
+            -   name: Get current build date
+                id: date
+                run: echo "::set-output name=date::$(date -u +'%Y-%m-%dT%H:%M:%SZ')"
 
-      - name: Build and push Docker image
-        uses: docker/build-push-action@ad44023a93711e3deb337508980b4b5e9bcdc5dc
-        with:
-          context: .
-          build-args:
-            VERSION: ${{ matrix.version }}
-            BUILD_DATE: ${{ steps.date.outputs.date }}
-          target: ${{ matrix.stage }}
-          tags: ${{ matrix.version }}
-          labels:  ${{ env.REGISTRY }}/phpimages/${{ matrix.stage }}
-          push: true
+            -   name: Build and push Docker image
+                uses: docker/build-push-action@ad44023a93711e3deb337508980b4b5e9bcdc5dc
+                with:
+                    context: .
+                    build-args: |
+                        VERSION=${{ matrix.version }}
+                        BUILD_DATE=${{ steps.date.outputs.date }}
+                    target: ${{ matrix.stage }}
+                    tags: ${{ matrix.version }}
+                    labels: ${{ env.REGISTRY }}/phpimages/${{ matrix.stage }}
+                    push: true
