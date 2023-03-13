@@ -2,11 +2,16 @@
 
 ## Images
 
-> All images have composer 2 installed.
+> All images have Composer v2 installed.
 
 See [Packages section](https://github.com/orgs/phpimages/packages)
 
-### `ghcr.io/phpimages/php-cli-xdebug`
+### `ghcr.io/phpimages/php-cli-xdebug` : PHP CLI image with xdebug
+
+**Available tags :**
+`7.4-alpine`, `7.4-bullseye`, `8.0-alpine`, `8.0-bullseye`, `8.1-alpine`, `8.1-bullseye`, `8.2-alpine`, `8.2-bullseye`
+
+### `ghcr.io/phpimages/php-cli-allinclusive`: PHP CLI image with commonly used extensions
 
 **Available tags :**
 `7.4-alpine`, `7.4-bullseye`, `8.0-alpine`, `8.0-bullseye`, `8.1-alpine`, `8.1-bullseye`, `8.2-alpine`, `8.2-bullseye`
