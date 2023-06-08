@@ -2,9 +2,16 @@ ARG VERSION
 ARG BUILD_DATE
 ARG OS
 
-# Aliases for docker php cli images by OS
+# @description base image for alpine versions.
 FROM php:$VERSION-cli-alpine AS php-cli-alpine
+
+RUN apk add --no-cache git
+
+
+# @description base image for debian versions.
 FROM php:$VERSION-cli-bullseye AS php-cli-bullseye
+
+RUN apt-get update && apt-get install -y git
 
 
 # @image ghcr.io/phpimages/php-cli-xdebug
@@ -24,7 +31,7 @@ LABEL org.opencontainers.image.version=$VERSION-$OS
 
 COPY --from=composer:2 /usr/bin/composer /usr/bin/composer
 COPY --from=mlocati/php-extension-installer /usr/bin/install-php-extensions /usr/bin/
-RUN install-php-extensions xdebug
+RUN install-php-extensions zip xdebug
 
 WORKDIR /opt
 
@@ -46,7 +53,7 @@ LABEL org.opencontainers.image.version=$VERSION-$OS
 
 COPY --from=composer:2 /usr/bin/composer /usr/bin/composer
 COPY --from=mlocati/php-extension-installer /usr/bin/install-php-extensions /usr/bin/
-RUN install-php-extensions gd intl yaml redis apcu opcache mcrypt mysqli pgsql pdo_mysql pdo_pgsql xdebug
+RUN install-php-extensions gd intl yaml redis apcu opcache mcrypt mysqli pgsql pdo_mysql pdo_pgsql xdebug zip
 
 WORKDIR /opt
 
