@@ -16,6 +16,12 @@ See [Packages section](https://github.com/orgs/phpimages/packages)
 **Available tags :**
 `7.4-alpine`, `7.4-bullseye`, `8.0-alpine`, `8.0-bullseye`, `8.1-alpine`, `8.1-bullseye`, `8.2-alpine`, `8.2-bullseye`
 
+### `ghcr.io/phpimages/phpstan`: PHP CLI image with phpstan
+
+**Available tags :**
+`7.4-alpine`, `7.4-bullseye`, `8.0-alpine`, `8.0-bullseye`, `8.1-alpine`, `8.1-bullseye`, `8.2-alpine`, `8.2-bullseye`
+
+
 ## Usage
 
 ```shell

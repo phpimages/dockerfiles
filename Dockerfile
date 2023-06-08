@@ -75,6 +75,6 @@ LABEL org.opencontainers.image.version=$VERSION-$OS
 
 RUN composer global require phpstan/phpstan
 
-ENTRYPOINT ["/root/.composer/vendor/bin/phpstan", "analyse", "src", "tests"]
+ENTRYPOINT ["/root/.composer/vendor/bin/phpstan", "analyse", "src", "tests", "--memory-limit=-1"]
 
 WORKDIR /opt
